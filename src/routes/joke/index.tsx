@@ -1,5 +1,8 @@
-import {component$, useSignal, useTask$} from '@builder.io/qwik';
+import {component$, useSignal, useStylesScoped$, useTask$} from '@builder.io/qwik';
 import {routeLoader$, Form, routeAction$, server$} from "@builder.io/qwik-city";
+
+import styles from "./index.css?inline";
+
 
 export const useJokeVoteAction = routeAction$((props) => {
     console.log('VOTE', props)
@@ -18,6 +21,8 @@ export const useDadJoke = routeLoader$(async () => {
 })
 
 export default component$(() => {
+    useStylesScoped$(styles)
+
     const dadJokeSignal = useDadJoke()
     const favoriteJokeAction = useJokeVoteAction()
     const isFavoriteSignal = useSignal(false)
